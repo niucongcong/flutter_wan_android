@@ -28,42 +28,52 @@ class HomeArticleWidget extends StatelessWidget {
       ),
     );
   }
-
   Widget _topView(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 30.0, top: 16.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              _circleTextWidget(
-                  context,
-                  CommonUtils.analysisFirstLetter(
-                      article.author, article.shareUser)),
-              SizedBox(width: 8.0),
-              Text(
-                  article.author.isNotEmpty
-                      ? article.author
-                      : article.shareUser,
-                  style: TextStyle(
-                      color: Theme.of(context).textSelectionColor,
-                      fontSize: 14.0))
-            ],
+          Expanded(
+            flex: 2,
+            child:  Row(
+              children: <Widget>[
+                _circleTextWidget(
+                    context,
+                    CommonUtils.analysisFirstLetter(
+                        article.author, article.shareUser)),
+                SizedBox(width: 8.0),
+                Container(
+                  child: Expanded(
+                    child: Text(
+                        article.author.isNotEmpty
+                            ? article.author
+                            : article.shareUser,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Theme.of(context).textSelectionColor,
+                            fontSize: 14.0)),
+                  )
+                )
+              ],
+            ),
           ),
-          Row(
+          Expanded(flex: 1,child: Row(
             children: <Widget>[
               Icon(Icons.timer,
                   size: 18.0, color: Theme.of(context).textSelectionColor),
               SizedBox(width: 4.0),
-              Text(article.niceDate,
+              Expanded(child: Text(CommonUtils.getYearAndMonthAndDay(article.niceDate),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: Theme.of(context).textSelectionColor,
-                      fontSize: 14.0))
+                      fontSize: 14.0)))
             ],
-          )
+          ))
         ],
       ),
     );
@@ -108,6 +118,8 @@ class HomeArticleWidget extends StatelessWidget {
                           SizedBox(height: 10.0),
                           Text(
                             article.title.trim(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Theme.of(context).textSelectionColor,
                               fontSize: 16.0,

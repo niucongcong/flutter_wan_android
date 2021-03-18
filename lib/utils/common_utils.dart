@@ -56,6 +56,14 @@ class CommonUtils {
     return keyString.split("|");
   }
 
+  static String getYearAndMonthAndDay(String timeString){
+    try{
+      DateTime dateTime=DateTime.parse(timeString);
+      return ""+dateTime.year.toString()+"."+dateTime.month.toString()+"."+dateTime.day.toString();
+    }catch(e,stack){
+      return timeString;
+    }
+  }
   static Future<List<String>> deleteSearchKey(
       String keyWord, bool isClear) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
