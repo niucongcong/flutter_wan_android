@@ -86,7 +86,7 @@ class _ProjectScreenState extends State<ProjectScreen>
     super.build(context);
     return StoreConnector<AppState, ProjectViewModel>(
         onInit: (store) {
-          store.dispatch(requestProjectClassifyAction());
+
         },
         builder: (context,viewModel){
           return Scaffold(

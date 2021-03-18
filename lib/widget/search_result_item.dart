@@ -17,7 +17,7 @@ class SearchResultItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: Colors.white,
       child: InkWell(
         onTap: () {
           itemClick(article);
@@ -44,7 +44,7 @@ class SearchResultItem extends StatelessWidget {
             ),
             Container(
               height: 0.5,
-              color: Colors.white12,
+              color: Colors.black,
             )
           ],
         ),
@@ -59,7 +59,7 @@ class SearchResultItem extends StatelessWidget {
       },
       icon: article.collect
           ? Icon(Icons.favorite, color: Colors.redAccent, size: 24.0)
-          : Icon(Icons.favorite_border, size: 24.0),
+          : Icon(Icons.favorite_border, size: 24.0,color: Colors.black,),
     );
   }
 
@@ -67,7 +67,7 @@ class SearchResultItem extends StatelessWidget {
     return Html(
       data: article.title,
       defaultTextStyle: TextStyle(
-          color: Colors.white70, fontSize: 16.0, fontWeight: FontWeight.w600),
+          color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w600),
       customTextStyle: (dom.Node node, TextStyle baseStyle) {
         if (node is dom.Element) {
           switch (node.localName) {
@@ -87,14 +87,14 @@ class SearchResultItem extends StatelessWidget {
         article.author.isNotEmpty ? article.author : article.shareUser;
     return Row(
       children: <Widget>[
-        Icon(Icons.account_circle, size: 16.0, color: Colors.white70),
+        Icon(Icons.account_circle, size: 16.0, color: Colors.black),
         SizedBox(width: 4.0),
-        Text(userName, style: TextStyle(fontSize: 14.0, color: Colors.white70)),
+        Text(userName, style: TextStyle(fontSize: 14.0, color: Colors.black)),
         SizedBox(width: 16.0),
-        Icon(Icons.access_time, size: 16.0, color: Colors.white70),
+        Icon(Icons.access_time, size: 16.0, color: Colors.black),
         SizedBox(width: 4.0),
         Text(article.niceDate,
-            style: TextStyle(fontSize: 14.0, color: Colors.white70))
+            style: TextStyle(fontSize: 14.0, color: Colors.black))
       ],
     );
   }

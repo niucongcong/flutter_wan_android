@@ -21,11 +21,15 @@ class _CollectionScreenState extends State<CollectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Collection")),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text("Collection", style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
+      ),
       body: StoreConnector<AppState, CollectionViewModel>(
-        onInit: (store) {
-          store.dispatch(requestCollectionData(true));
-        },
+        // onInit: (store) {
+        //   // store.dispatch(requestCollectionData(true));
+        // },
         converter: (Store store) => CollectionViewModel.fromStore(store),
         builder: (BuildContext context, CollectionViewModel viewModel) {
           return LoadingView(

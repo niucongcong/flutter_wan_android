@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/login_view_mode.dart';
-import 'package:flutter_app/ui/register/register_screen.dart';
 import 'package:flutter_app/widget/rounded_button_widget.dart';
 import 'package:flutter_app/widget/text_form_field_widget.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-import 'bottom_line_click_text_widget.dart';
-import 'click_text_widget.dart';
+class RegisterWidget extends StatefulWidget {
+  final Function(String, String, String) startRegister;
 
-class LoginWidget extends StatefulWidget {
-  final LoginViewModel viewModel;
-
-
-  LoginWidget(this.viewModel);
+  const RegisterWidget({Key key, @required this.startRegister})
+      : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _RegisterWidgetState createState() => _RegisterWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _RegisterWidgetState extends State<RegisterWidget> {
   bool _isButtonEnable = false;
   final _accountController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
     _accountController.addListener(_textChangeListener);
     _passwordController.addListener(_textChangeListener);
+    _confirmPasswordController.addListener(_textChangeListener);
     super.initState();
   }
 
@@ -34,18 +30,17 @@ class _LoginWidgetState extends State<LoginWidget> {
   void dispose() {
     _accountController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
   void _textChangeListener() {
     setState(() {
       _isButtonEnable = _accountController.text.length > 0 &&
-          _passwordController.text.length >= 6;
+          _passwordController.text.length >= 6 &&
+          _confirmPasswordController.text.length >= 6 &&
+          (_passwordController.text == _confirmPasswordController.text);
     });
-  }
-
-  void _startLoginRequest() {
-    widget.viewModel.login(_accountController.text, _passwordController.text);
   }
 
   @override
@@ -56,7 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Login",
+            "Register",
             style: TextStyle(
               fontFamily: "Pacifico",
               fontSize: 60.0,
@@ -79,42 +74,28 @@ class _LoginWidgetState extends State<LoginWidget> {
                   "Enter your password",
                   true,
                   controller: _passwordController,
+                ),
+                SizedBox(height: 20.0),
+                TextFormFieldWidget(
+                  "Confirm Password",
+                  "Enter your password again",
+                  true,
+                  controller: _confirmPasswordController,
                 )
               ],
             ),
           ),
-          SizedBox(height: 8.0),
-          Container(
-            alignment: Alignment.centerRight,
-            child: ClickTextWidget(
-              text: "Forget Password?",
-              clickCallback: () {
-                //点击忘记密码
-                Fluttertoast.showToast(msg: 'Developing...');
-              },
-            ),
-          ),
           SizedBox(height: 60.0),
           RoundedButtonWidget(
-            text: "Login",
-            clickCallback: _startLoginRequest,
+            text: "Register",
             isEnable: _isButtonEnable,
-          ),
-          SizedBox(height: 20.0),
-          BottomLineClickTextWidget(
-            text: "Not account yet? Create one.",
             clickCallback: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RegisterScreen(),
-                ),
-              );
+              widget.startRegister(_accountController.text,
+                  _passwordController.text, _confirmPasswordController.text);
             },
-          )
+          ),
         ],
       ),
     );
   }
 }
-

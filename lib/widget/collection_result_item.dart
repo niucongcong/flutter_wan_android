@@ -16,8 +16,16 @@ class CollectionResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(
+          color: Colors.grey,
+          width: 1
+        ),top: BorderSide(
+            color: Colors.grey,
+            width: 1
+        )),
+      ),
       child: InkWell(
         onTap: () {
           itemClick(article);
@@ -65,7 +73,7 @@ class CollectionResultItem extends StatelessWidget {
     return Html(
       data: article.title,
       defaultTextStyle: TextStyle(
-          color: Colors.white70, fontSize: 16.0, fontWeight: FontWeight.w600),
+          color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w600),
       customTextStyle: (dom.Node node, TextStyle baseStyle) {
         if (node is dom.Element) {
           switch (node.localName) {
@@ -85,17 +93,17 @@ class CollectionResultItem extends StatelessWidget {
       children: <Widget>[
         (article.author != null && article.author.isNotEmpty)
             ? Row(children: <Widget>[
-                Icon(Icons.account_circle, size: 16.0, color: Colors.white70),
+                Icon(Icons.account_circle, size: 16.0, color: Colors.black),
                 SizedBox(width: 4.0),
                 Text(article.author,
-                    style: TextStyle(fontSize: 14.0, color: Colors.white70)),
+                    style: TextStyle(fontSize: 14.0, color: Colors.black)),
                 SizedBox(width: 16.0),
               ])
             : Container(),
-        Icon(Icons.access_time, size: 16.0, color: Colors.white70),
+        Icon(Icons.access_time, size: 16.0, color: Colors.black),
         SizedBox(width: 4.0),
         Text(article.niceDate,
-            style: TextStyle(fontSize: 14.0, color: Colors.white70))
+            style: TextStyle(fontSize: 14.0, color: Colors.black))
       ],
     );
   }

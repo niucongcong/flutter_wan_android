@@ -16,7 +16,9 @@ class _PublicAccountScreenState extends State<PublicAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Public Account")),
+      appBar: AppBar(title: Text("Public Account",style: TextStyle(color: Colors.black)),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,),
       body: StoreConnector<AppState, PublicAccountViewModel>(
         onInit: (store) => store.dispatch(requestAccountTitle()),
         converter: (Store store) => PublicAccountViewModel.fromStore(store),
@@ -25,8 +27,8 @@ class _PublicAccountScreenState extends State<PublicAccountScreen> {
             length: viewModel.accountTitles.length,
             child: Column(
               children: <Widget>[
+                _buildContent(viewModel),
                 _buildAccountTitle(viewModel),
-                _buildContent(viewModel)
               ],
             ),
           );
@@ -47,7 +49,7 @@ class _PublicAccountScreenState extends State<PublicAccountScreen> {
     return Container(
       decoration: BoxDecoration(boxShadow: <BoxShadow>[
         BoxShadow(
-          color: const Color(0x55000000),
+          color: Colors.white,
           blurRadius: 0.0,
           spreadRadius: 0.0,
           offset: Offset(1.0, 0.0),
@@ -55,7 +57,9 @@ class _PublicAccountScreenState extends State<PublicAccountScreen> {
       ]),
       child: TabBar(
         isScrollable: true,
-        labelStyle: TextStyle(fontSize: 16.0),
+        labelColor: Colors.green,
+        indicatorColor: Colors.red,//选中下划线的颜色
+        unselectedLabelColor: Colors.black,
         labelPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         tabs: viewModel.accountTitles.map((title) => Text(title.name)).toList(),
       ),

@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   _isDialogShowing = true;
                 } else if (viewModel.loginStatus == 1 && !_isLoginSuccess) {
                   _isLoginSuccess = false;
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
                   // Fluttertoast.showToast(msg: viewModel.loginData.username);
                   //登录成功 跳转到主页
                   Navigator.pushReplacement(

@@ -3,7 +3,9 @@ import 'package:flutter_app/network/wan_android_api.dart';
 import 'package:flutter_app/ui/collections/collection_screen.dart';
 import 'package:flutter_app/ui/home/home_screen.dart';
 import 'package:flutter_app/ui/loginAndRegister/login_screen.dart';
+import 'package:flutter_app/ui/navigation/navigation_screen.dart';
 import 'package:flutter_app/ui/public_account/public_account_screen.dart';
+import 'package:flutter_app/ui/welfare/welfare_screen.dart';
 import 'package:flutter_app/widget/setting_item_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -32,7 +34,7 @@ class SettingContent extends StatelessWidget {
           SettingItemWidget(
               icon: FontAwesomeIcons.compass,
               title: "Navigation",
-              onClick: () => _navigateToScreen(context, HomeScreen())),
+              onClick: () => _navigateToScreen(context, NavigationScreen())),
           Container(
               height: 10.0,
               color: Colors.white12,
@@ -49,7 +51,7 @@ class SettingContent extends StatelessWidget {
           SettingItemWidget(
             icon: FontAwesomeIcons.gift,
             title: "Welfare",
-            onClick: () => _navigateToScreen(context, HomeScreen()),
+            onClick: () => _navigateToScreen(context, WelfareScreen()),
           ),
           Container(
               height: 10.0,

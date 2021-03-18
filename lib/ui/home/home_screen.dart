@@ -5,6 +5,7 @@ import 'package:flutter_app/model/home_view_model.dart';
 import 'package:flutter_app/redux/actions/home_action.dart';
 import 'package:flutter_app/redux/state/app_state.dart';
 import 'package:flutter_app/redux/state/home_state.dart';
+import 'package:flutter_app/route/hot_search_popup.dart';
 import 'package:flutter_app/ui/webview/webview_screen.dart';
 import 'package:flutter_app/widget/banner_widget.dart';
 import 'package:flutter_app/widget/circle_ripple_widget.dart';
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen>
           child: CircleRippleWidget(
             icon: Icon(Icons.search, size: 24.0,color: Colors.black,),
             onClick: () {
-              // Navigator.push(context, HotSearchPopup());
+              Navigator.push(context, HotSearchPopup());
             },
           ),
         )
@@ -103,9 +104,9 @@ class _HomeScreenState extends State<HomeScreen>
     return StoreConnector<AppState, HomeViewModel>(
         onInit: (store) {
           //初始化的时候获取数据 根据数据显示是加载中还是显示内容
-          store.dispatch(LoadStatusAction(status: LoadingStatus.loading));
-          store.dispatch(refreshBannerDataAction(context));
-          store.dispatch(loadHomeArticleAction(true));
+          // store.dispatch(LoadStatusAction(status: LoadingStatus.loading));
+          // store.dispatch(refreshBannerDataAction(context));
+          // store.dispatch(loadHomeArticleAction(true));
         },
         converter: (store) => HomeViewModel.fromStore(store),
         builder: (context, viewModel) {
